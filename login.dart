@@ -11,8 +11,10 @@ class Login extends StatelessWidget {
       
       appBar:const AppBarCustom(title: 'ورود',),
       body: Padding(
+        
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
            Center(
