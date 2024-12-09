@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:auth_flutter/helper/constance.dart';
 import 'package:auth_flutter/views/layouts/widgets.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,8 @@ class LoginOtp extends StatelessWidget {
                         SizedBox(
                           width: 5,
                         ),
-                        Text('ارسال مجدد', style: TextStyle(color: Colors.blue),),
+                        counterDown(),
+                      //  Text('ارسال مجدد', style: TextStyle(color: Colors.blue),),
                       ],
                     ),
                   ),
@@ -154,5 +156,59 @@ class _otpCodeState extends State<otpCode> {
                       },
                     ),
     );
+  }
+}
+
+class counterDown extends StatefulWidget {
+  const counterDown({super.key});
+
+  @override
+  State<counterDown> createState() => _counterDownState();
+}
+
+class _counterDownState extends State<counterDown> {
+  late Timer timer;
+  //late یعنی بعدا مقدار دهی میکنم
+  String text = '';
+  int addMin = 2;
+  DateTime counterDown = DateTime.now();
+
+  @override
+  void initState() {
+
+    runCounterDown();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+  void runCounterDown(){
+    counterDown = counterDown.add(Duration(minutes: addMin));
+    timer = Timer.periodic(const Duration(seconds: 1), (timer){
+      var now = DateTime.now();
+
+      var distance = counterDown.difference(now);
+
+      var min = distance.inMinutes;
+      var sec = distance.inSeconds % 60;
+
+      if(sec < 10){
+        
+      }
+      print("$min:$sec");
+  });
   }
 }
